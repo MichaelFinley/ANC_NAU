@@ -10,19 +10,55 @@ audio2_right = audio2(:,2);
 audio3_left = audio3(:,1);
 audio3_right = audio3(:,2);
 
-figure;
-subplot(3,1,1)
+ytop = 22050;
+                   
+T = 1/Fs1;             % Sampling period       
+L = length(audio1_left);             % Length of signal
+data_fft = fft(audio1_left);
+P2 = abs(data_fft/L);
+P1 = P2(1:L/2+1);
+P1(2:end-1) = 2*P1(2:end-1);
+f = Fs*(0:(L/2))/L;
+subplot(2,3,1)
+semilogy(f,P1) 
+title('Single-Sided Amplitude Spectrum of Sample 1')
+xlabel('f (Hz)')
+ylabel('|P1(f)|')
+xlim([0 ytop ])
+
+T = 1/Fs1;             % Sampling period       
+L = length(audio2_left);             % Length of signal
+data_fft = fft(audio2_left);
+P2 = abs(data_fft/L);
+P1 = P2(1:L/2+1);
+P1(2:end-1) = 2*P1(2:end-1);
+f = Fs*(0:(L/2))/L;
+subplot(2,3,2)
+semilogy(f,P1) 
+title('Single-Sided Amplitude Spectrum of Sample 2')
+xlabel('f (Hz)')
+ylabel('|P1(f)|')
+xlim([0 ytop ])
+
+T = 1/Fs1;             % Sampling period       
+L = length(audio3_left);             % Length of signal
+data_fft = fft(audio3_left);
+P2 = abs(data_fft/L);
+P1 = P2(1:L/2+1);
+P1(2:end-1) = 2*P1(2:end-1);
+f = Fs*(0:(L/2))/L;
+subplot(2,3,3)
+semilogy(f,P1) 
+title('Single-Sided Amplitude Spectrum of Sample 3')
+xlabel('f (Hz)')
+ylabel('|P1(f)|')
+xlim([0 ytop ])
+
+
+subplot(2,3,4)
 spectrogram(audio1_left,1000,500,1000,Fs1)
-subplot(3,1,2)
+subplot(2,3,5)
 spectrogram(audio2_left,1000,500,1000,Fs2)
-subplot(3,1,3)
+subplot(2,3,6)
 spectrogram(audio3_left,1000,500,1000,Fs3)
-% figure; %comment out to not  view right channels (identical)
-% subplot(3,1,1)
-% spectrogram(audio1_right,1000,500,1000,Fs1)
-% subplot(3,1,2)
-% spectrogram(audio2_right,1000,500,1000,Fs2)
-% subplot(3,1,3)
-% spectrogram(audio3_right,1000,500,1000,Fs3)
-figure;
-spectrogram(audio4,1000,500,1000,Fs4)
+
