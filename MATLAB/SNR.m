@@ -28,5 +28,5 @@ Pn=sum((mix(Sout,'InvOrisignal.wav',0,0)).^2); %noise power
 
  %metric for SNR
 snr=10*log10(Ps/Pn);
-disp(['SNR after cancellation =',num2str(snr),'dB']);
+disp(['SNR =',num2str(snr),'dB']);
 
